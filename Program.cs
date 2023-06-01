@@ -14,11 +14,14 @@
             { '7', '8', '9' }
         };
 
+        static int turns = 0;
+        static int playerIndex = 0;
+
         static void Main(string[] args) {
             char[] players = { 'O', 'X' };
-            int playerIndex = 0;
             int input;
             bool inputCorrect;
+
 
             do {
                 SetField();
@@ -39,14 +42,21 @@
                 while (!inputCorrect);
 
                 field[(input - 1) / 3, (input - 1) % 3] = currentPlayer;
+                turns++;
 
 
                 if (CheckWin(currentPlayer)) {
                     Console.WriteLine($"Player {currentPlayer} wins!");
                     Console.Write("Press any key to reset the game:");
                     Console.ReadKey();
-                    playerIndex = 0; // Reset player to player 1
-                    field = (char[,])fieldInitial.Clone(); // Reset field
+                    ResetGame();
+                }
+
+                if (turns == 9) {
+                    Console.WriteLine("Draw!");
+                    Console.Write("Press any key to reset the game:");
+                    Console.ReadKey();
+                    ResetGame();
                 }
             }
             while (true);
@@ -63,6 +73,12 @@
             Console.WriteLine("     |     |     ");
             Console.WriteLine($"  {field[2, 0]}  |  {field[2, 1]}  |  {field[2, 2]}  ");
             Console.WriteLine("     |     |     ");
+        }
+
+        public static void ResetGame() {
+            playerIndex = 0;
+            field = (char[,])fieldInitial.Clone();
+            turns = 0;
         }
 
 
