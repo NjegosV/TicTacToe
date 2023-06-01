@@ -47,15 +47,11 @@
 
                 if (CheckWin(currentPlayer)) {
                     Console.WriteLine($"Player {currentPlayer} wins!");
-                    Console.Write("Press any key to reset the game:");
-                    Console.ReadKey();
                     ResetGame();
                 }
 
                 if (turns == 9) {
                     Console.WriteLine("Draw!");
-                    Console.Write("Press any key to reset the game:");
-                    Console.ReadKey();
                     ResetGame();
                 }
             }
@@ -76,6 +72,8 @@
         }
 
         public static void ResetGame() {
+            Console.Write("Press any key to reset the game:");
+            Console.ReadKey();
             playerIndex = 0;
             field = (char[,])fieldInitial.Clone();
             turns = 0;
