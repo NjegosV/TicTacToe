@@ -17,8 +17,8 @@
         static void Main(string[] args) {
             char[] players = { 'O', 'X' };
             int playerIndex = 0;
-            int input = 0;
-            bool inputCorrect = false;
+            int input;
+            bool inputCorrect;
 
             do {
                 SetField();
@@ -45,8 +45,8 @@
                     Console.WriteLine($"Player {currentPlayer} wins!");
                     Console.Write("Press any key to reset the game:");
                     Console.ReadKey();
-                    playerIndex = 0;
-                    field = (char[,])fieldInitial.Clone();
+                    playerIndex = 0; // Reset player to player 1
+                    field = (char[,])fieldInitial.Clone(); // Reset field
                 }
             }
             while (true);
@@ -68,16 +68,19 @@
 
         public static bool CheckWin(char player) {
 
+            // Check rows
             for (int i = 0; i < 3; i++) {
                 if (field[i, 0] == player && field[i, 1] == player && field[i, 2] == player)
                     return true;
             }
 
+            // Check columns
             for (int i = 0; i < 3; i++) {
                 if (field[0, i] == player && field[1, i] == player && field[2, i] == player)
                     return true;
             }
 
+            // Check diagonals
             if (field[0, 0] == player && field[1, 1] == player && field[2, 2] == player)
                 return true;
 
